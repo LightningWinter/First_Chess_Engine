@@ -29,6 +29,10 @@ public class Piece {
         this.positionBitboard = getBitboard(bitboardIndex);
     }
 
+    public static void setPsudoLegalMovesLookupTable(HashMap<String,Long> map){
+        psudoLegalMovesLookupTable = map;
+    }
+
     public Coordinates getLocation(){return this.location;}
     public int getID(){return this.ID;}
     public int getBitboardIndex(){return this.bitboardIndex;}

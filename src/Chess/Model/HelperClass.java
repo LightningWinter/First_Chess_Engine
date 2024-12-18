@@ -2,7 +2,7 @@ package Chess.Model;
 
 import Chess.Coordinates;
 import Chess.Move;
-
+import java.util.Random;
 public class HelperClass {
     public static long getBitboard(int row, int col){
         int bitboardIndex = row*8 + col;
@@ -69,9 +69,18 @@ public class HelperClass {
         return out;
     }
 
+    public static long generateRandomZobristHash(){
+        Random random = new Random();
+        long min = Long.MIN_VALUE;
+        long max = Long.MAX_VALUE;
+        long randomNum = random.nextLong();
+        return randomNum;
+    }
+
     public static void main(String args[]){
         long test = 0xF69301FCAA8309FFL;
         showBitboard(test);
         showBitboard(verticalFlip(test));
+        System.out.println(generateRandomZobristHash());
     }
 }

@@ -5,4 +5,5 @@ import Chess.Coordinates;
 
 public class Position {
     private boolean player1ToMove;
+
 }
