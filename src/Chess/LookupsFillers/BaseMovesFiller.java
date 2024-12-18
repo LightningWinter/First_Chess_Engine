@@ -1,12 +1,11 @@
 package Chess.LookupsFillers;
 import Chess.Model.HelperClass;
-import Chess.Model.HelperClass.*;
 import Chess.Coordinates;
 
 import java.io.*;
 import java.util.HashMap;
 
-public class PsudolegalMovesFiller {
+public class BaseMovesFiller {
 
     private static final long startingPositiveDiagonal = 0x0102040810204080L;
     private static final long startingNegativeDiagonal = 0x8040201008040201L;
@@ -100,12 +99,32 @@ public class PsudolegalMovesFiller {
             ObjectOutputStream o = new ObjectOutputStream(f);
             o.writeObject(map);
 
+            f.close();
+            o.close();
+
         }catch (IOException e){
             System.out.println("Error initializing stream");
         }
     }
+    public static void readBaseMovesHashMapFromFile() {
+        try {
+            FileInputStream fi = new FileInputStream(new File("data/BaseMoves"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            HashMap<String,Long> map = (HashMap<String,Long>) oi.readObject();
+            for (String key : map.keySet()){
+                System.out.println("Key: " + key);
+                HelperClass.showBitboard(map.get(key));
+            }
+            fi.close();
+            oi.close();
 
+        } catch (IOException e) {
+            System.out.println("Error reading file contents");
+        } catch (ClassNotFoundException e){
+            System.out.println("type of Object in file does not match the type the object is cast to");
+        }
+    }
     public static void main(String[] args){
-        writeBaseMovesHashMapToFile();
+        readBaseMovesHashMapFromFile();
     }
 }
