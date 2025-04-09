@@ -15,6 +15,10 @@ public class HelperClass {
         return getBitboard(coordinates.row(), coordinates.col());
     }
 
+    public static Coordinates coordsFromBitBoardIndex(int bitboardIndex){
+        return new Coordinates(bitboardIndex / 8, bitboardIndex % 8);
+    }
+
     public static String getBinaryRepr(long num){
         String out = Long.toBinaryString(num);
         for (int i = out.length(); i < 64; i++){
@@ -75,6 +79,17 @@ public class HelperClass {
         long max = Long.MAX_VALUE;
         long randomNum = random.nextLong();
         return randomNum;
+    }
+    public static int log2(long num){
+        //IMPORTANT: this rounds the result down to the nearest smaller integer
+        return (int)(Math.log(num) / Math.log(2));
+    }
+
+    public static boolean onlyOneBitOn(long bitboard){
+        if (((bitboard & (bitboard - 1)) == 0) & bitboard != 0){
+            return true;
+        }
+        return false;
     }
 
     public static void main(String args[]){
